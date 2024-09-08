@@ -1,11 +1,7 @@
-N = int(input())
-result = 1
-
-for i in range(1,N+1):
-    if N == 0 and 1:
-        print('result')
-        break
+def fatorial(N):
+    if N == 0:
+        return 1
     else:
-        result *= i
-
-print(result)
+        return N * fatorial(N-1)
+    
+print(fatorial(int(input())))
