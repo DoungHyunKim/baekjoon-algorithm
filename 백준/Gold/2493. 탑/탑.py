@@ -1,17 +1,18 @@
 import sys
-input = sys.stdin.readline
+input = lambda: sys.stdin.readline().rstrip()
 
 N = int(input())
-towers = list(map(int, input().split()))
+tops = list(map(int, input().split()))
 
 stack = []
-ans = [0] * N
+top_connect = [0] * N
+
 for i in range(N):
-    while stack:
-        if stack[-1][1] > towers[i]:
-            ans[i] = stack[-1][0] + 1
-            break
-        else:
-            stack.pop()
-    stack.append((i, towers[i]))
-print(*ans)
+    # Check for the first taller tower to the left
+    while stack and tops[stack[-1]] <= tops[i]:  # Changed < to <= to match the first code logic
+        stack.pop()
+    if stack:
+        top_connect[i] = stack[-1] + 1  # Record the index (1-based)
+    stack.append(i)
+
+print(*top_connect)
