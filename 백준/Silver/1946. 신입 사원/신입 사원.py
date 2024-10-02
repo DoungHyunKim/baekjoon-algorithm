@@ -1,23 +1,25 @@
 import sys
-input = lambda: sys.stdin.readline().rstrip()
+input = sys.stdin.readline
 
-test_case = int(input())
+def count_successful_candidates(candidates):
+    candidates.sort()  # 서류 점수 기준으로 정렬
+    max_interview_score = float('inf')
+    successful_count = 0
 
-def employment(candidate):
-    maginot_line = sys.maxsize
-    successful_candidate = 0
+    for _, interview_score in candidates:
+        if interview_score < max_interview_score:
+            max_interview_score = interview_score
+            successful_count += 1
 
-    candidate = sorted(candidate, key=lambda x: (x[1], x[0]))
-    for document_score, interview_score in candidate:
-        if document_score < maginot_line:
-            maginot_line = document_score
-            successful_candidate += 1
-    return successful_candidate
+    return successful_count
 
+def main():
+    test_case = int(input())
 
-for _ in range(test_case):
-    total_candidate = int(input())
-    candidate_list = []
-    for _ in range(total_candidate):
-        candidate_list.append(list(map(int, input().split())))
-    print(employment(candidate_list))
+    for _ in range(test_case):
+        num_candidates = int(input())
+        candidates = [tuple(map(int, input().split())) for _ in range(num_candidates)]
+        print(count_successful_candidates(candidates))
+
+if __name__ == "__main__":
+    main()
