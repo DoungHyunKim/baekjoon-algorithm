@@ -1,14 +1,12 @@
-A = int(input())
-B = int(input())
-C = int(input())
+result = 1
+for _ in range(3):
+    N = int(input())
+    result *= N
+dp = [0] * 10
 
-multify = str(A * B * C)
+for num in str(result):
+    location = int(num) % 10
+    dp[location] += 1
 
-list_numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-
-for i in list_numbers:
-    index = multify.count(i)
-    if index != -1:  # 문자가 존재하는 경우
-        print(index)
-    else:
-        print(0)
+for i in dp:
+    print(i)
