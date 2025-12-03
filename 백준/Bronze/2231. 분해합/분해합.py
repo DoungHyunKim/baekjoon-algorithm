@@ -1,18 +1,13 @@
-import sys
-
-input = lambda: sys.stdin.readline().rstrip()
-
 N = int(input())
+start = max(1, N - len(str(N)) * 9)
+answer = 0
 
-# N의 가장 작은 생성자를 찾기 위한 브루트포스
-for i in range(1, N + 1):
-    # 각 숫자의 분해합을 계산
-    sums = i + sum(int(digit) for digit in str(i))
+for i in range(start, N + 1):
+    result = i
+    for digit in str(i):
+        result += int(digit)
+    if result == N:
+        answer = i
+        break
 
-    # 생성자를 찾으면 출력하고 종료
-    if sums == N:
-        print(i)
-        exit()
-
-# 생성자가 없으면 0 출력
-print(0)
+print(answer)
